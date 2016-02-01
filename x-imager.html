@@ -36,7 +36,7 @@
     Polymer({
       is: 'x-imager',
       properties: {
-        class: {
+        className: {
           type: String,
             value: '',
             notify: true
@@ -82,18 +82,12 @@
         }
       },
 
-      _srcChange:function(newVal, oldVal){
-        if(!oldVal){
+      _srcChange: function(newVal, oldVal){
+        if(!newVal){
           return;
         }
-        if(newVal!==oldVal){
+        if(newVal !== oldVal){
           this.initialize();
-        }
-      },
-
-      ready:function(){
-        if(this.src){
-            this.initialize();
         }
       },
 
@@ -102,7 +96,7 @@
         var options = {
           availableWidths: this.widths.split(' '),
           onResize: this.resize,
-          className: this.class,
+          className: this.className,
           lazyload: this.lazyload,
           lazyloadOffset: this.lazyloadOffset,
           scrollDelay: this.scrollDelay,
