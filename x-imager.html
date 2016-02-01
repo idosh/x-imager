@@ -24,18 +24,13 @@
   -->
 <dom-module id="x-imager">
   <style>
-    div {
-      display: inline-block;
-    }
-
-    x-imager img {
+    :host img {
       max-width: 100%;
+      display:block;
     }
   </style>
   <template>
-    <div>
-      <div id="placeholder" class$="{{selector}}" data-src$="{{src}}"></div>
-    </div>
+      <div class$="{{selector}}" data-src$="{{src}}"></div>
   </template>
   <script>
     Polymer({
@@ -128,8 +123,13 @@
             .replace(/{pixel_ratio}/g, Imager.transforms.pixelRatio(this.devicePixelRatio));
         };
 
-
-        var imager = new Imager(this.querySelectorAll('.' + this.selector), options);
+        var elems;
+        if (document.head.createShadowRoot) {
+            elems = this.root.querySelectorAll('.' + this.selector);
+        } else {
+            elems = this.querySelectorAll('.' + this.selector);
+        }
+        var imager = new Imager(elems, options);
 
         if (this.resize) {
           Imager.addEvent(window, 'resize', function() {
