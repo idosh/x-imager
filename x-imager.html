@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<script src="../imager.js/dist/Imager.min.js"></script>
 
 <!--
   <x-imager>
@@ -25,13 +24,14 @@
 <dom-module id="x-imager">
   <style>
     img {
-      max-width: 100%;
+      width: 100%;
       display:block;
     }
   </style>
   <template>
       <div class$="{{selector}}" data-src$="{{src}}"></div>
   </template>
+  <script src="../imager.js/dist/Imager.min.js"></script>
   <script>
     Polymer({
       is: 'x-imager',
