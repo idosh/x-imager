@@ -124,8 +124,8 @@
         }
         // monkey patch due to issues with curly braces being escaped in templates
         Imager.prototype.changeImageSrcToUseNewImageDimensions = function(src, selectedWidth) {
-          src = src.replace(escape('{'), '{')
-            .replace(escape('}'), '}');
+          src = src.replace(new RegExp(encodeURI('{'), 'g'), '{')
+            .replace(new RegExp(encodeURI('}'), 'g'), '}');
           return src
             .replace(/{width}/g, Imager.transforms.width(selectedWidth, this.widthsMap))
             .replace(/{pixel_ratio}/g, Imager.transforms.pixelRatio(this.devicePixelRatio));
