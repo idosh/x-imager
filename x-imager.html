@@ -88,7 +88,7 @@
         },
         pixelRatios: {
           type: String,
-          value: '',
+          value: '1 2',
           notify: true
         }
       },
@@ -106,7 +106,9 @@
         var me = this;
         var options = {
           availableWidths: this.widths.split(' '),
-          availablePixelRatios: this.pixelRatios.split(' '),
+          availablePixelRatios: this.pixelRatios.split(' ').map(function(item) {
+            return parseInt(item);
+          }),
           onResize: this.resize,
           className: this.className,
           lazyload: this.lazyload,
