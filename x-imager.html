@@ -23,13 +23,19 @@
   -->
 <dom-module id="x-imager">
   <style>
+    :host > div {
+      width: 100%;
+    }
+
     img {
       width: 100%;
-      display:block;
+      display: block;
     }
   </style>
   <template>
+    <div>
       <div class$="{{selector}}" data-src$="{{src}}"></div>
+    </div>
   </template>
   <script src="../imager.js/dist/Imager.min.js"></script>
   <script>
@@ -38,8 +44,8 @@
       properties: {
         className: {
           type: String,
-            value: '',
-            notify: true
+          value: '',
+          notify: true
         },
         lazyload: {
           type: Boolean,
@@ -79,14 +85,19 @@
           type: String,
           value: '',
           notify: true
+        },
+        pixelRatios: {
+          type: String,
+          value: '',
+          notify: true
         }
       },
 
-      _srcChange: function(newVal, oldVal){
-        if(!newVal){
+      _srcChange: function(newVal, oldVal) {
+        if (!newVal) {
           return;
         }
-        if(newVal !== oldVal){
+        if (newVal !== oldVal) {
           this.initialize();
         }
       },
@@ -95,6 +106,7 @@
         var me = this;
         var options = {
           availableWidths: this.widths.split(' '),
+          availablePixelRatios: this.pixelRatios.split(' '),
           onResize: this.resize,
           className: this.className,
           lazyload: this.lazyload,
@@ -103,8 +115,8 @@
           onImagesReplaced: function(images) {
             me.fire('imagereplaced', me, this);
           }
+        };
 
-        }
         if (this.widthInterpolator) {
           options.widthInterpolator = eval('(' + this.widthInterpolator + ')');
         }
@@ -119,9 +131,9 @@
 
         var elems;
         if (document.head.createShadowRoot) {
-            elems = this.root.querySelectorAll('.' + this.selector);
+          elems = this.root.querySelectorAll('.' + this.selector);
         } else {
-            elems = this.querySelectorAll('.' + this.selector);
+          elems = this.querySelectorAll('.' + this.selector);
         }
         var imager = new Imager(elems, options);
 
