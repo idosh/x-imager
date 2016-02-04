@@ -115,6 +115,9 @@
           lazyloadOffset: this.lazyloadOffset,
           scrollDelay: this.scrollDelay,
           onImagesReplaced: function(images) {
+            images.forEach(function(img) {
+              img.style.width = '100%';
+            });
             me.fire('imagereplaced', me, this);
           }
         };
