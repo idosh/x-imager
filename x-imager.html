@@ -134,12 +134,7 @@
             .replace(/{pixel_ratio}/g, Imager.transforms.pixelRatio(this.devicePixelRatio));
         };
 
-        var elems;
-        if (document.head.createShadowRoot) {
-          elems = this.root.querySelectorAll('.' + this.selector);
-        } else {
-          elems = this.querySelectorAll('.' + this.selector);
-        }
+        var elems = Polymer.dom(this.root).querySelectorAll('.' + this.selector);
         var imager = new Imager(elems, options);
 
         if (this.resize) {
